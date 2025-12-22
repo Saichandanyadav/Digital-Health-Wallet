@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = () => {
-    localStorage.clear()
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
     setToken(null)
     setRole(null)
     navigate("/login", { replace: true })

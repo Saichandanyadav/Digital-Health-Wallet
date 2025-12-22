@@ -3,7 +3,7 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api"
 const getHeaders = (isJson = true) => {
   const token = localStorage.getItem("token")
   const headers = {}
-  if (token) headers.Authorization = `Bearer ${token}`
+  if (token) headers["Authorization"] = `Bearer ${token}`
   if (isJson) headers["Content-Type"] = "application/json"
   return headers
 }
@@ -30,7 +30,7 @@ export const addVital = data =>
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(data)
-  })
+  }).then(r => r.json())
 
 export const getReports = () =>
   fetch(`${API}/reports`, { headers: getHeaders() }).then(r => r.json())
@@ -40,7 +40,7 @@ export const uploadReport = data =>
     method: "POST",
     headers: getHeaders(false),
     body: data
-  })
+  }).then(r => r.json())
 
 export const getSharedReports = () =>
   fetch(`${API}/reports`, { headers: getHeaders() }).then(r => r.json())
