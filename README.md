@@ -1,22 +1,33 @@
-# Digital Health Wallet
+# 🩺 Digital Health Wallet
 
-## **Project Overview**
+## 📌 Project Overview
 
-The **Digital Health Wallet** is a web application that allows users to manage and share their medical records and health vitals securely. Users can upload test reports, track their vitals over time, and grant selective access to family members, doctors, or friends.
+The **Digital Health Wallet** is a full-stack web application designed to securely manage, track, and share medical records and health vitals. It enables users to store test reports, visualize health vitals over time, and selectively share medical data with doctors, family members, or trusted individuals.
 
-The project is developed using **React + Vite + Tailwind CSS** for frontend, **Node.js + Express** for backend, and **SQLite** as the database.
+The application is built using **React + Vite + Tailwind CSS** on the frontend, **Node.js + Express** on the backend, and **SQLite** as the database.
 
-> ⚠️ **Note:** Deployment on platforms like Render or Vercel is currently limited because SQLite is not fully compatible with cloud deployment. Hence, the project works perfectly in a local environment.
+> ⚠️ **Important Note:**
+> The application is not deployed on cloud platforms like Render or Vercel because **SQLite is not suitable for persistent cloud deployment**. The project works flawlessly in a **local environment**. Migrating to **PostgreSQL or MySQL** would enable cloud deployment.
+
+---
+
+## 🎬 Live Demo
+
+📺 **YouTube Demo Video:**
+👉 [https://youtu.be/gX43htzfMCA](https://youtu.be/gX43htzfMCA)
 
 ---
 
 ## 🧩 Problem Statement
 
-Design a Health Wallet that is accessible to a person anywhere, anytime. The Health Wallet should have the ability to show a person’s vitals over a period of time.
+Design a **Digital Health Wallet** that allows users to access their health data **anytime and anywhere**, with the ability to track vitals over time and securely share medical records.
 
-* Users can upload test reports via web/mobile/WhatsApp.
-* Users can retrieve reports based on vitals, date, etc.
-* Users can grant access to select reports to family members, doctors, or friends.
+### Key Challenges Addressed:
+
+* Centralized storage of medical reports
+* Easy retrieval of reports based on vitals or dates
+* Secure sharing with controlled access
+* Visual tracking of health vitals over time
 
 ---
 
@@ -26,46 +37,51 @@ Design a Health Wallet that is accessible to a person anywhere, anytime. The Hea
 
 * **Framework:** ReactJS + Vite
 * **Styling:** Tailwind CSS
-* **State Management:** React hooks + Context API
+* **State Management:** React Hooks + Context API
 
 ### Backend
 
 * **Runtime:** Node.js
 * **Framework:** Express.js
-* **Database:** SQLite (local storage for demo)
+* **Database:** SQLite (local demo database)
 
-### Others
+### Other Tools
 
-* **File Storage:** Local folder (can be extended to cloud storage)
-* **Authentication:** JWT-based token authentication
+* **Authentication:** JWT-based authentication
+* **File Storage:** Local file system (extendable to cloud storage)
+* **Charts:** Used for vitals visualization
 
 ---
 
 ## 🎯 Functional Requirements
 
-### 1. User Management
+### 1️⃣ User Management
 
-* Register and login users
-* JWT-based authentication and role-based authorization
-* Roles: **Owner** (full access), **Viewer** (read-only access)
+* User registration and login
+* JWT-based authentication
+* Role-based authorization
+* User Roles:
 
-### 2. Health Reports
+  * **Owner:** Full access
+  * **Viewer:** Read-only access
+
+### 2️⃣ Health Reports Management
 
 * Upload medical reports (PDF/Image)
-* Store metadata:
+* Store report metadata:
 
   * Report type (Blood Test, X-Ray, etc.)
   * Date
-  * Associated vitals (BP, Sugar, Heart Rate, etc.)
+  * Associated vitals
 * View and download uploaded reports
 
-### 3. Vitals Tracking
+### 3️⃣ Vitals Tracking
 
-* Store and display vitals over time
-* Visualize trends using charts/graphs
+* Store health vitals over time
+* Visualize trends using charts
 * Filter vitals by date range
 
-### 4. Report Retrieval
+### 4️⃣ Report Retrieval
 
 * Search and filter reports by:
 
@@ -73,10 +89,14 @@ Design a Health Wallet that is accessible to a person anywhere, anytime. The Hea
   * Vital type
   * Report category
 
-### 5. Access Control
+### 5️⃣ Access Control
 
-* Share reports with doctors, family, or friends
-* Define read-only access for shared users
+* Share reports with:
+
+  * Doctors
+  * Family members
+  * Friends
+* Enforce read-only access for shared users
 
 ---
 
@@ -84,38 +104,42 @@ Design a Health Wallet that is accessible to a person anywhere, anytime. The Hea
 
 ### Frontend (ReactJS)
 
-* UI Components for login, registration, reports, and vitals
-* API integration with backend endpoints
-* State management via Context API and React hooks
+* Authentication pages (Login/Register)
+* Dashboards for reports and vitals
+* API integration using services
+* State management via Context API
 
 ### Backend (Node.js + Express)
 
-* REST API endpoints for:
+* REST APIs for:
 
   * Authentication (`/auth/login`, `/auth/register`)
   * Reports (`/reports`)
   * Vitals (`/vitals`)
-* Middleware for JWT verification and role-based access
-* SQLite database for storing user, reports, and vitals data
+* JWT middleware for route protection
+* Role-based access control
 
 ### Database (SQLite)
 
-* Tables:
+**Tables:**
 
-  * `users` (id, email, password, role)
-  * `vitals` (id, user_id, name, value, date)
-  * `reports` (id, user_id, title, type, date, file_path)
-* Relationships: `users` → `vitals`, `users` → `reports`
+* `users` → id, email, password, role
+* `vitals` → id, user_id, name, value, date
+* `reports` → id, user_id, title, type, date, file_path
+
+**Relationships:**
+
+* One-to-many between users and reports
+* One-to-many between users and vitals
 
 ### File Storage
 
-* Uploaded reports are stored in a local folder (can migrate to cloud storage in future)
+* Uploaded files stored locally
+* Designed for future cloud storage integration
 
 ---
 
-## 📐 Directory Structure
-
-### Root Directory
+## 📐 Project Directory Structure
 
 ```
 digital-health-wallet/
@@ -157,74 +181,56 @@ digital-health-wallet/
 
 ## 🔧 Setup Instructions
 
-### Backend
+### Backend Setup
 
-1. Navigate to backend:
+```bash
+cd backend
+npm install
+npm start
+```
 
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
+📍 Backend runs on: `http://localhost:5000`
 
-   ```bash
-   npm install
-   ```
-3. Start the server:
+---
 
-   ```bash
-   npm start
-   ```
-4. Server will run on `http://localhost:5000`
+### Frontend Setup
 
-### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-1. Navigate to frontend:
-
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-4. Access frontend on `http://localhost:5173` (or Vite assigned port)
+📍 Frontend runs on: `http://localhost:5173`
 
 ---
 
 ## 🔐 Security Considerations
 
-* JWT token verification for API endpoints
-* Role-based access control (Owner / Viewer)
-* Secure file uploads with validation
-* Sensitive user data is stored in SQLite securely
+* JWT-based API authentication
+* Role-based access control
+* Secure file upload handling
+* Sensitive data stored securely in SQLite
 
 ---
 
-## 🎬 Demo / Screen Recording
+## 📦 Project Deliverables
 
-* [YouTube Demo Video](https://www.youtube.com/watch?v=YOUR_VIDEO_LINK)
-
----
-
-## 📦 Deliverables
-
-1. Source code (frontend + backend)
-2. Setup instructions (this README)
-3. Screen recording walkthrough
-4. Functional application locally
+* Complete frontend and backend source code
+* Local setup documentation
+* Screen-recorded demo walkthrough
+* Fully functional local application
 
 ---
 
-## ✅ Why Deployment is Limited
+## ❌ Why Deployment Is Limited
 
-* SQLite is not fully compatible with cloud deployment platforms like Render.
-* The project runs perfectly in **local environment**, but cloud deployment would require switching to **PostgreSQL / MySQL** for full functionality.
+* SQLite does not support persistent cloud storage on platforms like Render.
+* The application is optimized for **local execution**.
+* Cloud deployment would require migration to:
+
+  * PostgreSQL or
+  * MySQL
 
 ---
 
@@ -232,7 +238,9 @@ digital-health-wallet/
 
 **Name:** Sai Chandan Gundaboina
 **Role:** Full Stack Developer
-**GitHub:** [https://github.com/Saichandanyadav](https://github.com/Saichandanyadav)
-**Email:** [saichandhanyadav2002@gmail](mailto:saichandhanyadav2002@gmail.com)
-**LinkedIn:** [https://linkedin.com/in/Saichandanyadav](https://linkedin.com/in/Saichandanyadav)
 
+🔗 **GitHub:** [https://github.com/Saichandanyadav](https://github.com/Saichandanyadav)
+
+📧 **Email:** [saichandhanyadav2002@gmail.com](mailto:saichandhanyadav2002@gmail.com)
+
+💼 **LinkedIn:** [https://linkedin.com/in/Saichandanyadav](https://linkedin.com/in/Saichandanyadav)
